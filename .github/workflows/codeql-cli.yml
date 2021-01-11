@@ -1,7 +1,7 @@
 name: Running CodeQL through the CLI
 
 on:
-  push:
+  [push,pull_request]
 
 jobs:
     codeql-cli:
@@ -19,6 +19,12 @@ jobs:
 
             - name: Run CodeQL
               run: |
+                echo "=======BEGIN======="
+                echo $GITHUB_SHA
+                echo ${{github.event.pull_request.head.sha}}
+                echo $GITHUB_REF
+                echo ${{github.event.pull_request.head.ref}}
+                echo "========END========"
                 wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
                 chmod +x codeql-runner-linux
                 ./codeql-runner-linux init --repository $GITHUB_REPOSITORY --github-url https://github.com --github-auth ${{ secrets.GITHUB_TOKEN }}
