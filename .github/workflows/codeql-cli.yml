@@ -22,4 +22,4 @@ jobs:
                 wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
                 chmod +x codeql-runner-linux
                 ./codeql-runner-linux init --repository $GITHUB_REPOSITORY --github-url https://github.com --github-auth ${{ secrets.GITHUB_TOKEN }}
-                ./codeql-runner-linux analyze --repository GITHUB_REPOSITORY --github-url https://github.com --github-auth ${{ secrets.GITHUB_TOKEN }} --commit $GITHUB_SHA --ref $GITHUB_REF
+                ./codeql-runner-linux analyze --repository $GITHUB_REPOSITORY --github-url https://github.com --github-auth ${{ secrets.GITHUB_TOKEN }} --commit $GITHUB_SHA --ref $GITHUB_REF
