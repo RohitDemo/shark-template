@@ -1,7 +1,10 @@
 name: Running CodeQL through the CLI
 
 on:
-  [push,pull_request]
+  push: 
+    branches: [master]
+  pull_request: 
+    branches: [master]
 
 jobs:
     codeql-cli:
