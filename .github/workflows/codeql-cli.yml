@@ -1,0 +1,25 @@
+name: Running CodeQL through the CLI
+
+on:
+  push:
+
+jobs:
+    codeql-cli:
+        name: CodeQL through CLI
+        runs-on: ubuntu-latest
+    
+        steps:
+            - name: Checkout Source
+              uses: actions/checkout@v2
+
+            - name: Set up JDK
+              uses: actions/setup-java@v1
+              with:
+                java-version: 11
+
+            - name: Run CodeQL
+              run: |
+                wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
+                chmod +x codeql-runner-linux
+                ./codeql-runner-linux init --repository $GITHUB_REPOSITORY --github-url https://github.com --github-auth ${{ secrets.GITHUB_TOKEN }}
+                ./codeql-runner-linux analyze --repository GITHUB_REPOSITORY --github-url https://github.com --github-auth ${{ secrets.GITHUB_TOKEN }} --commit $GITHUB_SHA --ref $GITHUB_REF
